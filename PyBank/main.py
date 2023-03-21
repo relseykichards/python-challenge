@@ -13,7 +13,13 @@ with open(csvpath) as csvfile:
     for line in csvreader:
         val=val+int(line[1])
         count=count+1
-    print(f"The total number of months in this period are: {val}")
-    print(f"The total profit/losses during this period is: {count}")
+    print(f"Total months: {count}")
+    print(f"total profit/losses: {val}")
 
+# How to access the correct column? moving average? 
 
+# * The changes in "Profit/Losses" over the entire period, and then the average of those changes
+  
+# * The greatest increase in profits (date and amount) over the entire period
+
+# * The greatest decrease in profits (date and amount) over the entire period
