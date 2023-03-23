@@ -3,9 +3,9 @@ import csv
 import numpy as np
 
 csvpath = os.path.join('Resources','budget_data.csv')
+
 total_value= 0
 total_month= 0
-
 greatest_profit= 0
 greatest_loss= 0
 greatest_profit_month=""
@@ -26,9 +26,11 @@ with open(csvpath, newline="") as csvfile:
         total_value+= current_value
         total_month+= 1
         current_profit_loss= current_value - previous_value
+
         if current_profit_loss > greatest_profit:
             greatest_profit = current_profit_loss
             greatest_profit_month = current_month 
+
         if current_profit_loss < greatest_loss:
             greatest_loss = current_profit_loss
             greatest_loss_month = current_month
@@ -39,7 +41,6 @@ with open(csvpath, newline="") as csvfile:
             continue
         change_of_profit.append(current_profit_loss)
     average_change_profit= round((sum(change_of_profit))/max(len(change_of_profit),1))
-
 
     print(f"Total profit/losses: ${total_value}")
     print(f"Total months: {total_month}")
