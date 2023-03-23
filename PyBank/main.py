@@ -3,7 +3,7 @@ import csv
 import numpy as np
 
 csvpath = os.path.join('Resources','budget_data.csv')
-
+# creating variables
 total_value= 0
 total_month= 0
 greatest_profit= 0
@@ -12,9 +12,10 @@ greatest_profit_month=""
 greatest_loss_month=""
 change_of_profit= []
 
+# opening csv fle and skipping header
 with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    # print(csvreader)
+    
     csv_header = next(csvreader)
 
     previous_value= 0
@@ -26,7 +27,7 @@ with open(csvpath, newline="") as csvfile:
         total_value+= current_value
         total_month+= 1
         current_profit_loss= current_value - previous_value
-
+    # finding greatest increase and decrease in profit
         if current_profit_loss > greatest_profit:
             greatest_profit = current_profit_loss
             greatest_profit_month = current_month 
@@ -34,7 +35,7 @@ with open(csvpath, newline="") as csvfile:
         if current_profit_loss < greatest_loss:
             greatest_loss = current_profit_loss
             greatest_loss_month = current_month
-        # finding average of change of value 
+    # finding average of change of value 
         previous_value = current_value 
         if if_first_row:
             if_first_row = False
