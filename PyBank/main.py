@@ -1,25 +1,49 @@
 import os
 import csv
+import numpy as np
 
 csvpath = os.path.join('Resources','budget_data.csv')
+total_value= 0
+total_month= 0
 
-with open(csvpath) as csvfile:
+greatest_profit= 0
+greatest_loss= 0
+greatest_profit_month=""
+greatest_loss_month=""
+change_of_profit= []
+
+with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     # print(csvreader)
     csv_header = next(csvreader)
 
-    val=0
-    count=0
+    previous_value= 0
+    if_first_row= True
+
     for line in csvreader:
-        val=val+int(line[1])
-        count=count+1
-    print(f"Total months: {count}")
-    print(f"total profit/losses: {val}")
+        current_value= float(line[1])
+        current_month= line[0]
+        total_value+= current_value
+        total_month+= 1
+        current_profit_loss= current_value - previous_value
+        if current_profit_loss > greatest_profit:
+            greatest_profit = current_profit_loss
+            greatest_profit_month = current_month 
+        if current_profit_loss < greatest_loss:
+            greatest_loss = current_profit_loss
+            greatest_loss_month = current_month
+        # finding average of change of value 
+        previous_value = current_value 
+        if if_first_row:
+            if_first_row = False
+            continue
+        change_of_profit.append(current_profit_loss)
+    average_change_profit= round((sum(change_of_profit))/max(len(change_of_profit),1))
 
-# How to access the correct column? moving average? 
 
-# * The changes in "Profit/Losses" over the entire period, and then the average of those changes
-  
-# * The greatest increase in profits (date and amount) over the entire period
+    print(f"Total profit/losses: ${total_value}")
+    print(f"Total months: {total_month}")
+    print(f"Greatest Increase in profits: {greatest_profit_month} ${greatest_profit}")
+    print(f"Greatest Decrease in Profits: {greatest_loss_month} ${greatest_loss}")
+    print(f"Average change: ${average_change_profit}")
 
-# * The greatest decrease in profits (date and amount) over the entire period
