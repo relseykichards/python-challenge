@@ -35,8 +35,10 @@ with open(csvpath) as csvfile:
 
         charles_percent = charles_count/vote_count
         charles_percent_formatted = round(charles_percent * 100)
+
         diana_percent = diana_count/vote_count
         diana_percent_formatted = round(diana_percent * 100)
+
         raymon_percent = raymon_count/vote_count
         raymon_percent_formatted = round(raymon_percent * 100)
 
@@ -48,13 +50,23 @@ with open(csvpath) as csvfile:
             winner = "Raymond Anthony Doane"
 
     
+    
+
     print(f"Total votes: {vote_count}")        
     print(f"{candidates[0]}: {charles_count} votes, {charles_percent_formatted}%")
     print(f"{candidates[1]}: {diana_count} votes, {diana_percent_formatted}%")
     print(f"{candidates[2]}: {raymon_count} votes, {raymon_percent_formatted}%") 
     print(f"The winner is: {winner}")  
 
-    
+    report = open("Analysis/poll_report.txt",'w')
+
+    report.write(f"Total votes: {vote_count} \n")        
+    report.write(f"{candidates[0]}: {charles_count} votes, {charles_percent_formatted}% \n")
+    report.write(f"{candidates[1]}: {diana_count} votes, {diana_percent_formatted}% \n")
+    report.write(f"{candidates[2]}: {raymon_count} votes, {raymon_percent_formatted}% \n") 
+    report.write(f"The winner is: {winner}") 
+
+    report.close()
 
   
  

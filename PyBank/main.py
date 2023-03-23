@@ -21,7 +21,7 @@ with open(csvpath, newline="") as csvfile:
     if_first_row= True
 
     for line in csvreader:
-        current_value= float(line[1])
+        current_value= int(line[1])
         current_month= line[0]
         total_value+= current_value
         total_month+= 1
@@ -48,3 +48,12 @@ with open(csvpath, newline="") as csvfile:
     print(f"Greatest Decrease in Profits: {greatest_loss_month} ${greatest_loss}")
     print(f"Average change: ${average_change_profit}")
 
+    report = open("profit_loss_report.txt",'w')
+
+    report.write(f"Total profit/losses: ${total_value} \n")
+    report.write(f"Total months: {total_month} \n")
+    report.write(f"Greatest Increase in profits: {greatest_profit_month} ${greatest_profit} \n")
+    report.write(f"Greatest Decrease in Profits: {greatest_loss_month} ${greatest_loss} \n")
+    report.write(f"Average change: ${average_change_profit}")
+
+    report.close()
